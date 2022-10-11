@@ -1,3 +1,9 @@
+import Col from "react-bootstrap/Col";
+
 export const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <Col md={8} className="bg-dark">
+      Dashboard here
+    </Col>
+  );
 };
