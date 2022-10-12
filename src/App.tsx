@@ -8,8 +8,8 @@ import { Dashboard } from "./components/Dashboard";
 
 function App() {
   return (
-    <Container fluid>
-      <Row className="p-0 mx-auto " style={{ height: "100vh" }}>
+    <Container fluid className="p-0 m-0">
+      <Row className="p-0 m-0" style={{ height: "100vh" }}>
         <SideBar />
         <Dashboard />
       </Row>

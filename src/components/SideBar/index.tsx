@@ -16,7 +16,7 @@ export const SideBar = () => {
       </div>
       <TodayWeather />
       <div className="d-flex justify-content-center mt-5">
-        Today . Fri, 5 Jun
+        Today • Fri, 5 Jun
       </div>
       <div className="d-flex mb-5 mt-3 gap-2 justify-content-center align-items-center">
         <Icon icon="carbon:location-filled" />

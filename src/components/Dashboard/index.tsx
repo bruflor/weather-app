@@ -4,11 +4,7 @@ import { StatusCard } from "../UI/Cards/statusCard";
 
 export const Dashboard = () => {
   return (
-    <Col
-      md={8}
-      className="mx-auto py-5"
-      style={{ paddingLeft: "120px", paddingRight: "120px" }}
-    >
+    <Col md={6} className="mx-auto p-5">
       <Row className="d-flex gap-2 justify-content-end pb-5">
         <button
           className="rounded-circle border-0 bg-light text-dark"
@@ -23,7 +19,7 @@ export const Dashboard = () => {
           <b>°F</b>
         </button>
       </Row>
-      <Row xs={1} md={6} className="gap-3 mx-auto py-5 justify-content-between">
+      <Row xs={1} md={5} className="py-5">
         <DayCard />
         <DayCard />
         <DayCard />
@@ -31,7 +27,7 @@ export const Dashboard = () => {
         <DayCard />
       </Row>
       <h3 className="py-2">Today's Highlights</h3>
-      <Row xs={1} md={3} className="gy-4 gap-1 w-100 mx-auto py-2">
+      <Row xs={1} md={2} className="d-flex align-items-center gy-4">
         <StatusCard />
         <StatusCard />
         <StatusCard />
