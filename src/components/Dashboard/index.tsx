@@ -1,9 +1,14 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { DayCard } from "../UI/Cards/daysCard";
+import { StatusCard } from "../UI/Cards/statusCard";
 
 export const Dashboard = () => {
   return (
-    <Col md={8} className="mx-auto py-5" style={{ paddingLeft: "120px" }}>
+    <Col
+      md={8}
+      className="mx-auto py-5"
+      style={{ paddingLeft: "120px", paddingRight: "120px" }}
+    >
       <Row className="d-flex gap-2 justify-content-end pb-5">
         <button
           className="rounded-circle border-0 bg-light text-dark"
@@ -25,32 +30,12 @@ export const Dashboard = () => {
         <DayCard />
         <DayCard />
       </Row>
-      <h3>Today's Highlights</h3>
-      <Row xs={1} md={3} className="gy-4 gap-4 mx-auto py-2">
-        <Card>
-          <Card.Text>Wind status</Card.Text>
-          <Card.Title>7mph</Card.Title>
-          <Card.Body>
-            <Card.Text>icon</Card.Text>
-            <Card.Text>wsw</Card.Text>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Text>Humidity</Card.Text>
-          <Card.Title>84%</Card.Title>
-          <Card.Body>
-            <Card.Text>icon</Card.Text>
-            <Card.Text>blabla</Card.Text>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Text>Visibility</Card.Text>
-          <Card.Title>6.4 miles</Card.Title>
-        </Card>
-        <Card>
-          <Card.Text>Air Pressure</Card.Text>
-          <Card.Title>998 mb</Card.Title>
-        </Card>
+      <h3 className="py-2">Today's Highlights</h3>
+      <Row xs={1} md={3} className="gy-4 gap-1 w-100 mx-auto py-2">
+        <StatusCard />
+        <StatusCard />
+        <StatusCard />
+        <StatusCard />
       </Row>
     </Col>
   );
