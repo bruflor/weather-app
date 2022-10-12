@@ -1,17 +1,24 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
 
-import { Col, Container, Row } from "react-bootstrap";
-import { Dashboard } from "./components/Dashboard";
-import { SideBar } from "./components/SideBar";
+import { Container, Row, Col } from "react-bootstrap";
 
 function App() {
   return (
-    <Container fluid className="mx-auto">
-      <Row className="p-0">
-        <SideBar />
-        <Dashboard />
-      </Row>
-    </Container>
+    <Row
+      as={Container}
+      fluid
+      className="p-0 mx-auto"
+      style={{ height: "100vh" }}
+    >
+      <Col md={3} className="bg-primary">
+        Today
+      </Col>
+      <Col md={9} className="">
+        Dashboard
+      </Col>
+    </Row>
   );
 }
 
