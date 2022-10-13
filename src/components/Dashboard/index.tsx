@@ -1,4 +1,4 @@
-import { Card, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
