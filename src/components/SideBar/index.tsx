@@ -1,18 +1,16 @@
 import { Col, Row } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 import { TodayWeather } from "../TodayWeather";
+import { RoundButtons } from "../UI/RoundButtons";
 
 export const SideBar = () => {
   return (
     <Col md={4} className="bg-primary m-0 px-0 py-5">
       <div className="d-flex mx-5 gap-5 justify-content-between">
         <div className="bg-secondary text-light p-2">Search for places</div>
-        <button
-          className="rounded-circle border-0 bg-secondary text-light"
-          style={{ height: "40px", width: "40px" }}
-        >
+        <RoundButtons color="secondary">
           <Icon icon="bx:current-location" fontSize={24} />
-        </button>
+        </RoundButtons>
       </div>
       <TodayWeather />
       <div className="d-flex justify-content-center mt-5">
