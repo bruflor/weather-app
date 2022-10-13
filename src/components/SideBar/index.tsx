@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 import { TodayWeather } from "../TodayWeather";
 import { RoundButtons } from "../UI/RoundButtons";
 import { WeatherApi } from "../../api/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { currentWeatherApi } from "../../api/api";
 
 //TODO: Get data from API
@@ -35,6 +35,7 @@ export const SideBar = () => {
       },
     },
   });
+  const [location, setLocation] = useState("274087");
 
   const getCurrentWeather = async (location: string) => {
     const response = await WeatherApi.get(`currentconditions/v1/${location}`);
@@ -42,11 +43,16 @@ export const SideBar = () => {
     console.log(response.data);
   };
 
+  useEffect(() => {
+    getCurrentWeather(location);
+  }, [location]);
+
   return (
     <Col md={4} className="bg-primary m-0 px-0 py-5">
       <div className="d-flex mx-5 gap-5 justify-content-between">
         <div className="bg-secondary text-light p-2">Search for places</div>
-        <button onClick={() => getCurrentWeather("274087")}>Weatherme</button>
+        <button onClick={() => getCurrentWeather(location)}>Weatherme</button>
+        <button onClick={() => setLocation("226081")}>Mais buttons</button>
         <RoundButtons color="secondary">
           <Icon icon="bx:current-location" fontSize={24} />
         </RoundButtons>
