@@ -4,6 +4,7 @@ import { TodayWeather } from "../TodayWeather";
 import { RoundButtons } from "../UI/RoundButtons";
 import { WeatherApi } from "../../api/api";
 import { useEffect, useState } from "react";
+import { SearchLocation } from "../SearchLocation";
 // import { currentWeatherApi } from "../../api/api";
 
 //TODO: Get data from API
@@ -38,6 +39,7 @@ export const SideBar = () => {
   });
 
   const [location, setLocation] = useState("274087");
+  const [localWeather, setLocalWeather] = useState(true);
 
   const getCurrentWeather = async (localCode: string) => {
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
@@ -53,17 +55,32 @@ export const SideBar = () => {
   return (
     <Col md={4} className="bg-primary m-0 px-0 py-5">
       <div className="d-flex mx-5 gap-5 justify-content-between">
-        <div className="bg-secondary text-light p-2">Search for places</div>
+        <button
+          className="bg-secondary text-light p-2"
+          onClick={() => setLocalWeather(!localWeather)}
+        >
+          {localWeather ? "Search for places" : "Back to previous"}
+        </button>
         <RoundButtons color="secondary" onClick={() => setLocation("274087")}>
           <Icon icon="bx:current-location" fontSize={24} />
         </RoundButtons>
       </div>
-      <TodayWeather
+      {localWeather ? (
+        <TodayWeather
+          weatherText={currentWeather.WeatherText}
+          tempIs={"celsius"}
+          celsiusTemp={currentWeather.Temperature.Metric.Value}
+          faTemp={currentWeather.Temperature.Imperial.Value}
+        />
+      ) : (
+        <SearchLocation />
+      )}
+      {/* <TodayWeather
         weatherText={currentWeather.WeatherText}
         tempIs={"celsius"}
         celsiusTemp={currentWeather.Temperature.Metric.Value}
         faTemp={currentWeather.Temperature.Imperial.Value}
-      />
+      /> */}
     </Col>
   );
 };
