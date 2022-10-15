@@ -3,6 +3,8 @@ import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
 
+// forecasts/v1/daily/5day/
+
 export const Dashboard = () => {
   return (
     <Col md={6} className="mx-auto p-5">

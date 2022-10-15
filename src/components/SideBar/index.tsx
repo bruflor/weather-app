@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 //TODO: Local dynamic
 //TODO: create a prop to receive tempIs °C or °F from the dashboard selection
 
+//? Initialize state without fake data
 export const SideBar = () => {
   const [currentWeather, setCurrentWeather] = useState({
     LocalObservationDateTime: "2022-10-13T16:27:00+01:00",
@@ -35,6 +36,7 @@ export const SideBar = () => {
       },
     },
   });
+
   const [location, setLocation] = useState("274087");
 
   const getCurrentWeather = async (localCode: string) => {
@@ -47,13 +49,12 @@ export const SideBar = () => {
     getCurrentWeather(location);
   }, [location]);
 
+  //code locations: 226081, 274087
   return (
     <Col md={4} className="bg-primary m-0 px-0 py-5">
       <div className="d-flex mx-5 gap-5 justify-content-between">
         <div className="bg-secondary text-light p-2">Search for places</div>
-        <button onClick={() => getCurrentWeather(location)}>Weatherme</button>
-        {/* <button onClick={() => setLocation("226081")}>Mais buttons</button> */}
-        <RoundButtons color="secondary" onClick={() => setLocation("226081")}>
+        <RoundButtons color="secondary" onClick={() => setLocation("274087")}>
           <Icon icon="bx:current-location" fontSize={24} />
         </RoundButtons>
       </div>
@@ -63,11 +64,6 @@ export const SideBar = () => {
         celsiusTemp={currentWeather.Temperature.Metric.Value}
         faTemp={currentWeather.Temperature.Imperial.Value}
       />
-      <div className="d-flex justify-content-center mt-5">Fri • 5 • Jun</div>
-      <div className="d-flex mb-5 mt-3 gap-2 justify-content-center align-items-center">
-        <Icon icon="carbon:location-filled" />
-        <p className="p-0 m-0">Lisbon</p>
-      </div>
     </Col>
   );
 };
