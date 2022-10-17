@@ -38,13 +38,13 @@ export const SideBar = () => {
     },
   });
 
-  const [location, setLocation] = useState("274087");
+  const [location, setLocation] = useState("226081");
   const [localWeather, setLocalWeather] = useState(true);
 
   const getCurrentWeather = async (localCode: string) => {
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
-    // console.log(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
