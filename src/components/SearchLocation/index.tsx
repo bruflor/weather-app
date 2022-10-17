@@ -1,5 +1,4 @@
 import { Icon } from "@iconify/react";
-import { InputGroup } from "react-bootstrap";
 
 export const SearchLocation = () => {
   return (

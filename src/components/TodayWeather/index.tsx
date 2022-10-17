@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Icon } from "@iconify/react";
 
 //TODO: Change de date by props.
-//? Switch Case to change de icon
+//? Help: Switch Case to change de icon
 
 interface WeatherProps {
   weatherText: string;

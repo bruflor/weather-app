@@ -7,14 +7,13 @@ import { useEffect, useState } from "react";
 import { SearchLocation } from "../SearchLocation";
 // import { currentWeatherApi } from "../../api/api";
 
-//TODO: Get data from API
+//TODO: Get data location from API
 //TODO: Search bar
 //TODO: Convert date format and pass dynamically
 //TODO: Get local with button
-//TODO: Local dynamic
 //TODO: create a prop to receive tempIs °C or °F from the dashboard selection
 
-//? Initialize state without fake data
+//? Help: Initialize state without fake data
 export const SideBar = () => {
   const [currentWeather, setCurrentWeather] = useState({
     LocalObservationDateTime: "2022-10-13T16:27:00+01:00",
@@ -75,12 +74,6 @@ export const SideBar = () => {
       ) : (
         <SearchLocation />
       )}
-      {/* <TodayWeather
-        weatherText={currentWeather.WeatherText}
-        tempIs={"celsius"}
-        celsiusTemp={currentWeather.Temperature.Metric.Value}
-        faTemp={currentWeather.Temperature.Imperial.Value}
-      /> */}
     </Col>
   );
 };

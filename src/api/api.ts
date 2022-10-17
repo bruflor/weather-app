@@ -5,5 +5,6 @@ export const WeatherApi = axios.create({
     method: "GET",
     params: {
         apikey: "qzecCM3srZb9djpibG98IQ8KMNXD0ZAO",
+        metric: true
     }
 })
