@@ -1,5 +1,8 @@
 import "./styles.scss";
 import Thunderstorm from "../../assets/Thunderstorm.png";
+import HeavyCloud from "../../assets/HeavyCloud.png";
+import LightCloud from "../../assets/LightCloud.png";
+import HeavyRain from "../../assets/HeavyRain.png";
 import Clear from "../../assets/Clear.png";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
@@ -19,10 +22,31 @@ export const TodayWeather = ({
 }: WeatherProps) => {
   // "Clear", "Cloudy", "Partly sunny",  "Sunny",
 
+  const [weatherIcon, setWeatherIcon] = useState<any>();
+
+  switch (weatherText) {
+    case "Clear" || "Sunny":
+      setWeatherIcon(Clear);
+      break;
+    case "Cloudy":
+      setWeatherIcon(HeavyCloud);
+      break;
+    case "Partly sunny":
+      setWeatherIcon(LightCloud);
+      break;
+    case "Thunderstorm":
+      setWeatherIcon(Thunderstorm);
+      break;
+    case "Rain":
+      setWeatherIcon(HeavyRain);
+      break;
+  }
+  console.log(weatherIcon);
+
   return (
     <div className="h-75 w-100 d-flex flex-column align-items-center mt-5 py-5">
       <div className="imgContainer h-75 w-100 p-0 m-0">
-        <img alt="" src={Clear} />
+        {/* <img alt="" src={`${weatherIcon}`} /> */}
       </div>
       <div className="temperature d-flex p-2">
         <h1>{tempIs === "celsius" ? celsiusTemp : faTemp}</h1>
