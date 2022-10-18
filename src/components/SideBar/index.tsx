@@ -43,7 +43,7 @@ export const SideBar = () => {
   const getCurrentWeather = async (localCode: string) => {
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
-    console.log(response.data);
+    // console.log(response.data);
   };
 
   useEffect(() => {
