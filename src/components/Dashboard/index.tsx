@@ -5,19 +5,19 @@ import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
 
-// forecasts/v1/daily/5day/
+//? Help: get location from selectedCity
 
 export const Dashboard = () => {
   const [location, setLocation] = useState("274087");
-
   const [forecast, setForecast] = useState<any>([]);
+
   const getForecasts = async (localCode: string) => {
     const response = await WeatherApi.get(
       `forecasts/v1/daily/5day/${localCode}`
     );
     setForecast(response.data.DailyForecasts);
   };
-  console.log(forecast);
+  // console.log(forecast);
   useEffect(() => {
     getForecasts(location);
   }, [location]);
@@ -34,10 +34,11 @@ export const Dashboard = () => {
       </Row>
       <Row xs={1} md={5} className="py-5">
         {forecast.map((day: any) => {
+          const cardId = Math.random().toString();
           return (
             <DayCard
-              key={day.Date}
-              id={day.Date}
+              id={cardId}
+              key={cardId}
               currentDate={day.Date}
               minWeather={day.Temperature.Minimum.Value}
               maxWeather={day.Temperature.Maximum.Value}

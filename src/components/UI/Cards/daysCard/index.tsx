@@ -1,4 +1,3 @@
-import { RandomUUIDOptions } from "crypto";
 import { Card, Col } from "react-bootstrap";
 import WeatherIcon from "../../../../assets/Snow.png";
 import "./styles.scss";
@@ -8,7 +7,7 @@ export interface DayForeCastProps {
   minWeather: number;
   maxWeather: number;
   icon?: string;
-  id: RandomUUIDOptions;
+  id: string;
 }
 export const DayCard = ({
   id,
@@ -22,7 +21,6 @@ export const DayCard = ({
     day: "numeric",
     month: "short",
   });
-
   return (
     <Col>
       <Card className="cardContainer bg-primary py-4 align-items-center">
