@@ -8,9 +8,8 @@ import { SearchLocation } from "../SearchLocation";
 
 //TODO: Convert date format and send via props
 //TODO: send via props city name
-//TODO: Get pc local network with button
+//TODO: Get pc local network with button (browser authorizin)
 //TODO: Interface to change useState currentWeather
-//TODO: pedir autorização ao browser para pegar localização
 
 export const SideBar = ({ setSelectedCity, selectedCity }: any) => {
   const [currentWeather, setCurrentWeather] = useState<any>(null);
