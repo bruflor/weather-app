@@ -1,7 +1,9 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
-import { ObjectFlags } from "typescript";
 import { WeatherApi } from "../../api/api";
+
+//? Help: Error when search with ` ~ ' and ç
+//? Help: How to lift the state of selectedCity, useContext, through props?
 
 export const SearchLocation = () => {
   const [searchCity, setSearchCity] = useState("");
@@ -12,7 +14,6 @@ export const SearchLocation = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchCity(enteredCity);
-    // console.log(enteredCity);
   };
 
   const cityEnteredHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,7 @@ export const SearchLocation = () => {
   return (
     <>
       <form
-        className="d-flex mx-3 my-4 justify-content-between"
+        className="d-flex mx-5 my-4 justify-content-between"
         onSubmit={handleSubmit}
       >
         <div className="d-flex gap-2 px-2 border border-light align-items-center col-md-9">
@@ -55,11 +56,11 @@ export const SearchLocation = () => {
         </button>
       </form>
 
-      <div className="d-flex flex-column mx-3 gap-3">
+      <div className="d-flex flex-column mx-5 my-5 gap-3">
         {responseCities && responseCities.length > 0 ? (
           <>
             <button
-              className="bg-transparent border-secondary border py-2 text-light"
+              className="bg-transparent border-secondary border py-3 text-light"
               onClick={() => {
                 setSelectedCity(responseCities[0].Key);
               }}
@@ -69,7 +70,7 @@ export const SearchLocation = () => {
               {responseCities[0].Country.EnglishName}
             </button>
             <button
-              className="bg-transparent border-secondary border py-2 text-light"
+              className="bg-transparent border-secondary border py-3 text-light"
               onClick={() => {
                 setSelectedCity(responseCities[1].Key);
               }}
@@ -79,7 +80,7 @@ export const SearchLocation = () => {
               {responseCities[1].Country.EnglishName}
             </button>
             <button
-              className="bg-transparent border-secondary border py-2 text-light"
+              className="bg-transparent border-secondary border py-3 text-light"
               onClick={() => {
                 setSelectedCity(responseCities[2].Key);
               }}

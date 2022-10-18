@@ -1,4 +1,3 @@
-import { RandomUUIDOptions } from "crypto";
 import { Card, Col } from "react-bootstrap";
 import WeatherIcon from "../../../../assets/Snow.png";
 import "./styles.scss";

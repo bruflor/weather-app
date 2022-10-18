@@ -5,15 +5,14 @@ import { RoundButtons } from "../UI/RoundButtons";
 import { WeatherApi } from "../../api/api";
 import { useEffect, useState } from "react";
 import { SearchLocation } from "../SearchLocation";
-// import { currentWeatherApi } from "../../api/api";
 
-//TODO: Get data location from API
-//TODO: Search bar
-//TODO: Convert date format and pass dynamically
-//TODO: Get local with button
-//TODO: create a prop to receive tempIs °C or °F from the dashboard selection
+//TODO: Convert date format and send via props
+//TODO: send via props city name
+//TODO: Get pc local network with button
 
+//? Help:  Get data location from selectedCity
 //? Help: Initialize state without fake data
+
 export const SideBar = () => {
   const [currentWeather, setCurrentWeather] = useState({
     LocalObservationDateTime: "2022-10-13T16:27:00+01:00",

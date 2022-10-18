@@ -5,7 +5,7 @@ import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
 
-// forecasts/v1/daily/5day/
+//? Help: get location from selectedCity
 
 export const Dashboard = () => {
   const [location, setLocation] = useState("274087");
