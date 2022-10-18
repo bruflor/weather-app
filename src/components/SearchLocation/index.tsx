@@ -1,19 +1,17 @@
 import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { WeatherApi } from "../../api/api";
 
-//? Help: Error when search with ` ~ ' and ç
-//? Help: How to lift the state of selectedCity, useContext, through props?
+//TODO: Error when search with ` ~ ' and ç (Validação no input para não tem caracter especial try catch / expressões regulares)
+//TODO: SeachLocationProps / definir tipo de props para o component SearchLocation
 
-export const SearchLocation = () => {
-  const [searchCity, setSearchCity] = useState("");
+export const SearchLocation = ({ setSelectedCity }: any) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
-  const [selectedCity, setSelectedCity] = useState<number>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSearchCity(enteredCity);
+    getSearchedCity(enteredCity);
   };
 
   const cityEnteredHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,11 +25,6 @@ export const SearchLocation = () => {
     setResponseCities(response.data);
   };
 
-  useEffect(() => {
-    getSearchedCity(searchCity);
-  }, [searchCity]);
-
-  console.log(selectedCity);
   return (
     <>
       <form
@@ -58,38 +51,20 @@ export const SearchLocation = () => {
 
       <div className="d-flex flex-column mx-5 my-5 gap-3">
         {responseCities && responseCities.length > 0 ? (
-          <>
-            <button
-              className="bg-transparent border-secondary border py-3 text-light"
-              onClick={() => {
-                setSelectedCity(responseCities[0].Key);
-              }}
-            >
-              {responseCities[0].LocalizedName} •{" "}
-              {responseCities[0].AdministrativeArea.EnglishName} -{" "}
-              {responseCities[0].Country.EnglishName}
-            </button>
-            <button
-              className="bg-transparent border-secondary border py-3 text-light"
-              onClick={() => {
-                setSelectedCity(responseCities[1].Key);
-              }}
-            >
-              {responseCities[1].LocalizedName} •{" "}
-              {responseCities[1].AdministrativeArea.EnglishName} -{" "}
-              {responseCities[1].Country.EnglishName}
-            </button>
-            <button
-              className="bg-transparent border-secondary border py-3 text-light"
-              onClick={() => {
-                setSelectedCity(responseCities[2].Key);
-              }}
-            >
-              {responseCities[2].LocalizedName} •{" "}
-              {responseCities[2].AdministrativeArea.EnglishName} -{" "}
-              {responseCities[2].Country.EnglishName}
-            </button>
-          </>
+          responseCities.slice(0, 3).map((city: any) => {
+            return (
+              <button
+                key={city.Key}
+                className="bg-transparent border-secondary border py-3 text-light"
+                onClick={() => {
+                  setSelectedCity(city.Key);
+                }}
+              >
+                {city.LocalizedName} • {city.AdministrativeArea.EnglishName} -{" "}
+                {city.Country.EnglishName}
+              </button>
+            );
+          })
         ) : (
           <div></div>
         )}

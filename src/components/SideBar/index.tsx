@@ -9,32 +9,32 @@ import { SearchLocation } from "../SearchLocation";
 //TODO: Convert date format and send via props
 //TODO: send via props city name
 //TODO: Get pc local network with button
+//TODO: Interface to change useState currentWeather
+//TODO: pedir autorização ao browser para pegar localização
 
-//? Help:  Get data location from selectedCity
-//? Help: Initialize state without fake data
-
-export const SideBar = () => {
-  const [currentWeather, setCurrentWeather] = useState({
-    LocalObservationDateTime: "2022-10-13T16:27:00+01:00",
-    EpochTime: 1665674820,
-    WeatherText: "Chovendo nugget",
-    WeatherIcon: 4,
-    HasPrecipitation: true,
-    PrecipitationType: null,
-    IsDayTime: false,
-    Temperature: {
-      Metric: {
-        Value: 49.7,
-        Unit: "C",
-        UnitType: 17,
-      },
-      Imperial: {
-        Value: 160.0,
-        Unit: "F",
-        UnitType: 18,
-      },
-    },
-  });
+export const SideBar = ({ setSelectedCity, selectedCity }: any) => {
+  const [currentWeather, setCurrentWeather] = useState<any>(null);
+  //   {
+  //   LocalObservationDateTime: "2022-10-13T16:27:00+01:00",
+  //   EpochTime: 1665674820,
+  //   WeatherText: "Chovendo nugget",
+  //   WeatherIcon: 4,
+  //   HasPrecipitation: true,
+  //   PrecipitationType: null,
+  //   IsDayTime: false,
+  //   Temperature: {
+  //     Metric: {
+  //       Value: 49.7,
+  //       Unit: "C",
+  //       UnitType: 17,
+  //     },
+  //     Imperial: {
+  //       Value: 160.0,
+  //       Unit: "F",
+  //       UnitType: 18,
+  //     },
+  //   },
+  // }
 
   const [location, setLocation] = useState("226081");
   const [localWeather, setLocalWeather] = useState(true);
@@ -46,8 +46,8 @@ export const SideBar = () => {
   };
 
   useEffect(() => {
-    getCurrentWeather(location);
-  }, [location]);
+    getCurrentWeather(selectedCity);
+  }, [selectedCity]);
 
   //code locations: 226081, 274087
   return (
@@ -63,7 +63,8 @@ export const SideBar = () => {
           <Icon icon="bx:current-location" fontSize={24} />
         </RoundButtons>
       </div>
-      {localWeather ? (
+
+      {localWeather && currentWeather ? (
         <TodayWeather
           weatherText={currentWeather.WeatherText}
           tempIs={"celsius"}
@@ -71,7 +72,7 @@ export const SideBar = () => {
           faTemp={currentWeather.Temperature.Imperial.Value}
         />
       ) : (
-        <SearchLocation />
+        <SearchLocation setSelectedCity={setSelectedCity} />
       )}
     </Col>
   );

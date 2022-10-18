@@ -5,10 +5,9 @@ import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
 
-//? Help: get location from selectedCity
+//TODO: Today's highlight with data
 
-export const Dashboard = () => {
-  const [location, setLocation] = useState("274087");
+export const Dashboard = ({ selectedCity }: any) => {
   const [forecast, setForecast] = useState<any>([]);
 
   const getForecasts = async (localCode: string) => {
@@ -17,10 +16,10 @@ export const Dashboard = () => {
     );
     setForecast(response.data.DailyForecasts);
   };
-  // console.log(forecast);
+
   useEffect(() => {
-    getForecasts(location);
-  }, [location]);
+    getForecasts(selectedCity);
+  }, [selectedCity]);
 
   return (
     <Col md={6} className="mx-auto p-5">
