@@ -6,36 +6,38 @@ import { WeatherApi } from "../../api/api";
 import { useEffect, useState } from "react";
 import { SearchLocation } from "../SearchLocation";
 
-//TODO: Convert date format and send via props
-//TODO: send via props city name
 //TODO: Get pc local network with button (browser authorizin)
-//TODO: Interface to change useState currentWeather
 
-export const SideBar = ({ setSelectedCity, selectedCity }: any) => {
-  const [currentWeather, setCurrentWeather] = useState<any>(null);
-  //   {
-  //   LocalObservationDateTime: "2022-10-13T16:27:00+01:00",
-  //   EpochTime: 1665674820,
-  //   WeatherText: "Chovendo nugget",
-  //   WeatherIcon: 4,
-  //   HasPrecipitation: true,
-  //   PrecipitationType: null,
-  //   IsDayTime: false,
-  //   Temperature: {
-  //     Metric: {
-  //       Value: 49.7,
-  //       Unit: "C",
-  //       UnitType: 17,
-  //     },
-  //     Imperial: {
-  //       Value: 160.0,
-  //       Unit: "F",
-  //       UnitType: 18,
-  //     },
-  //   },
-  // }
+interface CurrentWeatherProps {
+  LocalObservationDateTime: string;
+  EpochTime: number;
+  WeatherText: string;
+  WeatherIcon: number;
+  HasPrecipitation: true;
+  PrecipitationType: null;
+  IsDayTime: false;
+  Temperature: {
+    Metric: {
+      Value: number;
+      Unit: string;
+      UnitType: number;
+    };
+    Imperial: {
+      Value: number;
+      Unit: string;
+      UnitType: number;
+    };
+  };
+}
+export const SideBar = ({
+  setSelectedCity,
+  selectedCity,
+  setCityName,
+  cityName,
+}: any) => {
+  const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
 
-  const [location, setLocation] = useState("226081");
+  // const [location, setLocation] = useState();
   const [localWeather, setLocalWeather] = useState(true);
 
   const getCurrentWeather = async (localCode: string) => {
@@ -49,6 +51,7 @@ export const SideBar = ({ setSelectedCity, selectedCity }: any) => {
   }, [selectedCity]);
 
   //code locations: 226081, 274087
+  console.log(currentWeather?.LocalObservationDateTime);
   return (
     <Col md={4} className="bg-primary m-0 px-0 py-5">
       <div className="d-flex mx-5 gap-5 justify-content-between">
@@ -58,20 +61,24 @@ export const SideBar = ({ setSelectedCity, selectedCity }: any) => {
         >
           {localWeather ? "Search for places" : "Back to previous"}
         </button>
-        <RoundButtons color="secondary" onClick={() => setLocation("274087")}>
+        {/* <RoundButtons color="secondary" onClick={() => setLocation(274087)}>
           <Icon icon="bx:current-location" fontSize={24} />
-        </RoundButtons>
+        </RoundButtons> */}
       </div>
-
       {localWeather && currentWeather ? (
         <TodayWeather
+          dateTime={currentWeather?.LocalObservationDateTime}
           weatherText={currentWeather.WeatherText}
           tempIs={"celsius"}
           celsiusTemp={currentWeather.Temperature.Metric.Value}
           faTemp={currentWeather.Temperature.Imperial.Value}
+          cityName={cityName}
         />
       ) : (
-        <SearchLocation setSelectedCity={setSelectedCity} />
+        <SearchLocation
+          setSelectedCity={setSelectedCity}
+          setCityName={setCityName}
+        />
       )}
     </Col>
   );

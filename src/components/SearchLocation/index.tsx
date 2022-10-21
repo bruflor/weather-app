@@ -5,7 +5,7 @@ import { WeatherApi } from "../../api/api";
 //TODO: Error when search with ` ~ ' and ç (Validação no input para não tem caracter especial try catch / expressões regulares)
 //TODO: SeachLocationProps / definir tipo de props para o component SearchLocation
 
-export const SearchLocation = ({ setSelectedCity }: any) => {
+export const SearchLocation = ({ setSelectedCity, setCityName }: any) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
 
@@ -58,6 +58,7 @@ export const SearchLocation = ({ setSelectedCity }: any) => {
                 className="bg-transparent border-secondary border py-3 text-light"
                 onClick={() => {
                   setSelectedCity(city.Key);
+                  setCityName(city.LocalizedName);
                 }}
               >
                 {city.LocalizedName} • {city.AdministrativeArea.EnglishName} -{" "}
