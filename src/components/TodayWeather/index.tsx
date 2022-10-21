@@ -7,7 +7,6 @@ import Clear from "../../assets/Clear.png";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
-//TODO: Change de date by props.
 //? Help: Switch Case to change de icon here and in forecast
 
 interface WeatherProps {
@@ -15,6 +14,8 @@ interface WeatherProps {
   tempIs: string;
   celsiusTemp: number;
   faTemp: number;
+  dateTime: string;
+  cityName: string;
 }
 
 export const TodayWeather = ({
@@ -22,6 +23,8 @@ export const TodayWeather = ({
   tempIs,
   celsiusTemp,
   faTemp,
+  dateTime,
+  cityName,
 }: WeatherProps) => {
   // "Clear", "Cloudy", "Partly sunny",  "Sunny",
   // const [weatherIcon, setWeatherIcon] = useState<any>();
@@ -48,6 +51,11 @@ export const TodayWeather = ({
   // }
   // console.log(weatherIcon);
 
+  const formatedDate = new Date(dateTime).toLocaleDateString("en-us", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  });
   return (
     <div className="h-75 w-100 d-flex flex-column align-items-center mt-5 py-5">
       <div className="imgContainer h-75 w-100 p-0 m-0">
@@ -58,10 +66,10 @@ export const TodayWeather = ({
         <span>°{tempIs === "celsius" ? "C" : "F"}</span>
       </div>
       <h2 className="py-5">{weatherText}</h2>
-      <div className="d-flex justify-content-center mt-5">Fri • 5 • Jun</div>
+      <div className="d-flex justify-content-center mt-5">{formatedDate}</div>
       <div className="d-flex mb-5 mt-3 gap-2 justify-content-center align-items-center">
         <Icon icon="carbon:location-filled" />
-        <p className="p-0 m-0">Lisbon</p>
+        <p className="p-0 m-0">{cityName}</p>
       </div>
     </div>
   );

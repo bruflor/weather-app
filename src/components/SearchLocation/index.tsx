@@ -1,11 +1,11 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { WeatherApi } from "../../api/api";
+import { CityProps } from "../../App";
 
 //TODO: Error when search with ` ~ ' and ç (Validação no input para não tem caracter especial try catch / expressões regulares)
-//TODO: SeachLocationProps / definir tipo de props para o component SearchLocation
 
-export const SearchLocation = ({ setSelectedCity }: any) => {
+export const SearchLocation = ({ setSelectedCity, setCityName }: CityProps) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
 
@@ -19,8 +19,10 @@ export const SearchLocation = ({ setSelectedCity }: any) => {
   };
 
   const getSearchedCity = async (city: string) => {
+    const encodedCity = encodeURIComponent(city);
+
     const response = await WeatherApi.get(
-      `locations/v1/cities/search?q=${city}`
+      `locations/v1/cities/search?q=${encodedCity}`
     );
     setResponseCities(response.data);
   };
@@ -58,6 +60,7 @@ export const SearchLocation = ({ setSelectedCity }: any) => {
                 className="bg-transparent border-secondary border py-3 text-light"
                 onClick={() => {
                   setSelectedCity(city.Key);
+                  setCityName(city.LocalizedName);
                 }}
               >
                 {city.LocalizedName} • {city.AdministrativeArea.EnglishName} -{" "}
