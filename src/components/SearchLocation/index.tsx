@@ -19,8 +19,10 @@ export const SearchLocation = ({ setSelectedCity, setCityName }: CityProps) => {
   };
 
   const getSearchedCity = async (city: string) => {
+    const encodedCity = encodeURIComponent(city);
+
     const response = await WeatherApi.get(
-      `locations/v1/cities/search?q=${city}`
+      `locations/v1/cities/search?q=${encodedCity}`
     );
     setResponseCities(response.data);
   };
