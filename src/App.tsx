@@ -6,9 +6,16 @@ import { Container, Row } from "react-bootstrap";
 import { SideBar } from "./components/SideBar";
 import { Dashboard } from "./components/Dashboard";
 
+export interface CityProps {
+  selectedCity?: number;
+  setSelectedCity: (selectedCity: number) => void;
+  cityName?: string;
+  setCityName: (cityName: string) => void;
+}
+
 function App() {
-  const [selectedCity, setSelectedCity] = useState<number>(226081);
-  const [cityName, setCityName] = useState("Palhoça");
+  const [selectedCity, setSelectedCity] = useState<CityProps>();
+  const [cityName, setCityName] = useState<CityProps>();
   return (
     <Container fluid className="p-0 m-0">
       <Row className="p-0 m-0" style={{ height: "100vh" }}>

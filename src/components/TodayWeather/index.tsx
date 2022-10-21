@@ -7,7 +7,6 @@ import Clear from "../../assets/Clear.png";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
-//TODO: Change de date by props.
 //? Help: Switch Case to change de icon here and in forecast
 
 interface WeatherProps {
