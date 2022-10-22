@@ -1,15 +1,13 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WeatherApi } from "../../api/api";
 import { CityProps } from "../../App";
 
 //TODO: Error when search with ` ~ ' and ç (Validação no input para não tem caracter especial try catch / expressões regulares)
 
-export const SearchLocation = ({
-  setSelectedCity,
-  setCityName,
-  setShowLocalWeather,
-}: any) => {
+export const SearchLocation = ({ setShowLocalWeather }: any) => {
+  const [selectedCity, setSelectedCity] = useState<number>(274087);
+  const [cityName, setCityName] = useState<string>("Lisbon");
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
 
@@ -30,6 +28,11 @@ export const SearchLocation = ({
     );
     setResponseCities(response.data);
   };
+
+  useEffect(() => {
+    localStorage.setItem("selectedCity", `${selectedCity}`);
+    localStorage.setItem("cityName", `${cityName}`);
+  }, [selectedCity, cityName]);
 
   return (
     <>
@@ -59,13 +62,25 @@ export const SearchLocation = ({
         {responseCities && responseCities.length > 0 ? (
           responseCities.slice(0, 3).map((city: any) => {
             return (
+              // <button
+              //   key={city.Key}
+              //   className="bg-transparent border-secondary border py-3 text-light"
+              //   onClick={() => {
+              //     localStorage.setItem(
+              //       "setSelectedCity",
+              //       `${city.Key}`
+              //       // setCityName(city.LocalizedName);
+              //       // setShowLocalWeather(true);
+              //     );
+              //   }}
+              // >
               <button
                 key={city.Key}
                 className="bg-transparent border-secondary border py-3 text-light"
                 onClick={() => {
                   setSelectedCity(city.Key);
                   setCityName(city.LocalizedName);
-                  setShowLocalWeather(true);
+                  // setShowLocalWeather(true)
                 }}
               >
                 {city.LocalizedName} • {city.AdministrativeArea.EnglishName} -{" "}
