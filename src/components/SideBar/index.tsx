@@ -5,6 +5,7 @@ import { RoundButtons } from "../UI/RoundButtons";
 import { WeatherApi } from "../../api/api";
 import { useEffect, useState } from "react";
 import { SearchLocation } from "../SearchLocation";
+import { CityProps } from "../../App";
 
 //TODO: Get pc local network with button (browser authorizin)
 
@@ -34,13 +35,13 @@ export const SideBar = ({
   selectedCity,
   setCityName,
   cityName,
-}: any) => {
+}: CityProps) => {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
 
   // const [location, setLocation] = useState();
   const [showLocalWeather, setShowLocalWeather] = useState(true);
 
-  const getCurrentWeather = async (localCode: string) => {
+  const getCurrentWeather = async (localCode: number) => {
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
     // console.log(response.data);
@@ -48,7 +49,7 @@ export const SideBar = ({
 
   useEffect(() => {
     getCurrentWeather(selectedCity);
-  }, [selectedCity, setSelectedCity]);
+  }, [selectedCity]);
 
   //code locations: 226081, 274087
   console.log(currentWeather?.LocalObservationDateTime);
@@ -61,7 +62,13 @@ export const SideBar = ({
         >
           {showLocalWeather ? "Search for places" : "Back to previous"}
         </button>
-        <RoundButtons color="secondary" onClick={() => setSelectedCity(274087)}>
+        <RoundButtons
+          color="secondary"
+          onClick={() => {
+            setSelectedCity(274087);
+            setCityName("Lisbon");
+          }}
+        >
           <Icon icon="bx:current-location" fontSize={24} />
         </RoundButtons>
       </div>
@@ -76,8 +83,11 @@ export const SideBar = ({
         />
       ) : (
         <SearchLocation
+          setShowLocalWeather={setShowLocalWeather}
           setSelectedCity={setSelectedCity}
           setCityName={setCityName}
+          selectedCity={selectedCity}
+          cityName={cityName}
         />
       )}
     </Col>

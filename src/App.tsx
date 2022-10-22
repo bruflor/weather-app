@@ -7,17 +7,17 @@ import { SideBar } from "./components/SideBar";
 import { Dashboard } from "./components/Dashboard";
 
 export interface CityProps {
-  selectedCity?: number;
+  selectedCity: number;
   setSelectedCity: (selectedCity: number) => void;
-  cityName?: string;
+  cityName: string;
   setCityName: (cityName: string) => void;
 }
 
 //TODO: initialize state with locaStorage value
 
 function App() {
-  const [selectedCity, setSelectedCity] = useState<CityProps>();
-  const [cityName, setCityName] = useState<CityProps>();
+  const [selectedCity, setSelectedCity] = useState<number>(274087);
+  const [cityName, setCityName] = useState<string>("Lisbon");
 
   return (
     <Container fluid className="p-0 m-0">
