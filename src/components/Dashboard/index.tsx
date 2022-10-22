@@ -7,7 +7,7 @@ import { RoundButtons } from "../UI/RoundButtons";
 
 //TODO: Today's highlight with data
 
-export const Dashboard = ({ selectedCity }: any) => {
+export const Dashboard = ({ location }: any) => {
   const [forecast, setForecast] = useState<any>([]);
 
   const getForecasts = async (localCode: string) => {
@@ -18,8 +18,8 @@ export const Dashboard = ({ selectedCity }: any) => {
   };
 
   useEffect(() => {
-    getForecasts(selectedCity);
-  }, [selectedCity]);
+    getForecasts(location);
+  }, [location]);
 
   return (
     <Col md={6} className="mx-auto p-5">
@@ -45,7 +45,9 @@ export const Dashboard = ({ selectedCity }: any) => {
           );
         })}
       </Row>
-      <h3 className="py-2">Today's Highlights</h3>
+      <h3 className="py-2">
+        {localStorage.getItem("cityName")}'s Highlights for Today
+      </h3>
       <Row xs={1} md={2} className="d-flex align-items-center gy-4">
         <StatusCard />
         <StatusCard />

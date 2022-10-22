@@ -30,29 +30,22 @@ interface CurrentWeatherProps {
     };
   };
 }
-export const SideBar = ({
-  setSelectedCity,
-  selectedCity,
-  setCityName,
-  cityName,
-}: CityProps) => {
+export const SideBar = ({ location }: any) => {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
 
-  // const [location, setLocation] = useState();
   const [showLocalWeather, setShowLocalWeather] = useState(true);
 
-  const getCurrentWeather = async (localCode: number) => {
+  const getCurrentWeather = async (localCode: string) => {
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
-    // console.log(response.data);
   };
+  console.log(location);
 
   useEffect(() => {
-    getCurrentWeather(selectedCity);
-  }, [selectedCity]);
+    getCurrentWeather(location);
+  }, [location]);
 
   //code locations: 226081, 274087
-  console.log(currentWeather?.LocalObservationDateTime);
   return (
     <Col md={4} className="bg-primary m-0 px-0 py-5">
       <div className="d-flex mx-5 gap-5 justify-content-between">
@@ -62,13 +55,7 @@ export const SideBar = ({
         >
           {showLocalWeather ? "Search for places" : "Back to previous"}
         </button>
-        <RoundButtons
-          color="secondary"
-          onClick={() => {
-            setSelectedCity(274087);
-            setCityName("Lisbon");
-          }}
-        >
+        <RoundButtons color="secondary" onClick={() => {}}>
           <Icon icon="bx:current-location" fontSize={24} />
         </RoundButtons>
       </div>
@@ -79,16 +66,9 @@ export const SideBar = ({
           tempIs={"celsius"}
           celsiusTemp={currentWeather.Temperature.Metric.Value}
           faTemp={currentWeather.Temperature.Imperial.Value}
-          cityName={cityName}
         />
       ) : (
-        <SearchLocation
-          setShowLocalWeather={setShowLocalWeather}
-          setSelectedCity={setSelectedCity}
-          setCityName={setCityName}
-          selectedCity={selectedCity}
-          cityName={cityName}
-        />
+        <SearchLocation setShowLocalWeather={setShowLocalWeather} />
       )}
     </Col>
   );

@@ -16,19 +16,14 @@ export interface CityProps {
 //TODO: initialize state with locaStorage value
 
 function App() {
-  const [selectedCity, setSelectedCity] = useState<number>(274087);
-  const [cityName, setCityName] = useState<string>("Lisbon");
-
+  const [location, setLocation] = useState<any>(
+    localStorage.getItem("cityKey")
+  );
   return (
     <Container fluid className="p-0 m-0">
       <Row className="p-0 m-0" style={{ height: "100vh" }}>
-        <SideBar
-          setSelectedCity={setSelectedCity}
-          selectedCity={selectedCity}
-          setCityName={setCityName}
-          cityName={cityName}
-        />
-        <Dashboard selectedCity={selectedCity} />
+        <SideBar location={location} />
+        <Dashboard location={location} />
       </Row>
     </Container>
   );

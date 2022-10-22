@@ -15,7 +15,6 @@ interface WeatherProps {
   celsiusTemp: number;
   faTemp: number;
   dateTime: string;
-  cityName: string;
 }
 
 export const TodayWeather = ({
@@ -24,7 +23,6 @@ export const TodayWeather = ({
   celsiusTemp,
   faTemp,
   dateTime,
-  cityName,
 }: WeatherProps) => {
   // "Clear", "Cloudy", "Partly sunny",  "Sunny",
   // const [weatherIcon, setWeatherIcon] = useState<any>();
@@ -69,7 +67,7 @@ export const TodayWeather = ({
       <div className="d-flex justify-content-center mt-5">{formatedDate}</div>
       <div className="d-flex mb-5 mt-3 gap-2 justify-content-center align-items-center">
         <Icon icon="carbon:location-filled" />
-        <p className="p-0 m-0">{cityName}</p>
+        <p className="p-0 m-0">{localStorage.getItem("cityName")}</p>
       </div>
     </div>
   );
