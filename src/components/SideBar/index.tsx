@@ -38,7 +38,7 @@ export const SideBar = ({
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
 
   // const [location, setLocation] = useState();
-  const [localWeather, setLocalWeather] = useState(true);
+  const [showLocalWeather, setShowLocalWeather] = useState(true);
 
   const getCurrentWeather = async (localCode: string) => {
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
@@ -48,7 +48,7 @@ export const SideBar = ({
 
   useEffect(() => {
     getCurrentWeather(selectedCity);
-  }, [selectedCity]);
+  }, [selectedCity, setSelectedCity]);
 
   //code locations: 226081, 274087
   console.log(currentWeather?.LocalObservationDateTime);
@@ -57,15 +57,15 @@ export const SideBar = ({
       <div className="d-flex mx-5 gap-5 justify-content-between">
         <button
           className="bg-secondary text-light p-2"
-          onClick={() => setLocalWeather(!localWeather)}
+          onClick={() => setShowLocalWeather(!showLocalWeather)}
         >
-          {localWeather ? "Search for places" : "Back to previous"}
+          {showLocalWeather ? "Search for places" : "Back to previous"}
         </button>
-        {/* <RoundButtons color="secondary" onClick={() => setLocation(274087)}>
+        <RoundButtons color="secondary" onClick={() => setSelectedCity(274087)}>
           <Icon icon="bx:current-location" fontSize={24} />
-        </RoundButtons> */}
+        </RoundButtons>
       </div>
-      {localWeather && currentWeather ? (
+      {showLocalWeather && currentWeather ? (
         <TodayWeather
           dateTime={currentWeather?.LocalObservationDateTime}
           weatherText={currentWeather.WeatherText}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
@@ -13,9 +13,12 @@ export interface CityProps {
   setCityName: (cityName: string) => void;
 }
 
+//TODO: initialize state with locaStorage value
+
 function App() {
   const [selectedCity, setSelectedCity] = useState<CityProps>();
   const [cityName, setCityName] = useState<CityProps>();
+
   return (
     <Container fluid className="p-0 m-0">
       <Row className="p-0 m-0" style={{ height: "100vh" }}>
