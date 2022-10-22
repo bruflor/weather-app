@@ -60,7 +60,7 @@ export const TodayWeather = ({
         <img alt="" src={Clear} />
       </div>
       <div className="temperature d-flex p-2">
-        <h1>{tempIs === "celsius" ? celsiusTemp : faTemp}</h1>
+        <h1>{tempIs === "celsius" ? celsiusTemp.toFixed(0) : faTemp}</h1>
         <span>°{tempIs === "celsius" ? "C" : "F"}</span>
       </div>
       <h2 className="py-5">{weatherText}</h2>
