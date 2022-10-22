@@ -5,7 +5,11 @@ import { CityProps } from "../../App";
 
 //TODO: Error when search with ` ~ ' and ç (Validação no input para não tem caracter especial try catch / expressões regulares)
 
-export const SearchLocation = ({ setSelectedCity, setCityName }: CityProps) => {
+export const SearchLocation = ({
+  setSelectedCity,
+  setCityName,
+  setShowLocalWeather,
+}: any) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
 
@@ -61,6 +65,7 @@ export const SearchLocation = ({ setSelectedCity, setCityName }: CityProps) => {
                 onClick={() => {
                   setSelectedCity(city.Key);
                   setCityName(city.LocalizedName);
+                  setShowLocalWeather(true);
                 }}
               >
                 {city.LocalizedName} • {city.AdministrativeArea.EnglishName} -{" "}
