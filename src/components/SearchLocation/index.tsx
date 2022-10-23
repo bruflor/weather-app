@@ -3,16 +3,24 @@ import { useEffect, useState } from "react";
 import { WeatherApi } from "../../api/api";
 import { CityProps } from "../../App";
 
-//TODO: Validação no input para não tem caracter especial try catch / expressões regulares
-
 export const SearchLocation = ({ setShowLocalWeather }: any) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
   const [errorInput, setErrorInput] = useState("");
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   getSearchedCity(enteredCity);
-  // };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const specialChars = /[^A-Za-z\s]/g;
+    try {
+      if (!specialChars.test(enteredCity) && enteredCity.length !== 0) {
+        return getSearchedCity(enteredCity);
+      }
+      throw new Error("Search must contain just letters");
+    } catch (err: any) {
+      setErrorInput(err.message);
+      console.error(err);
+    }
+  };
 
   const cityEnteredHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredCity(e.target.value);
@@ -20,35 +28,17 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
 
   const getSearchedCity = async (city: string) => {
     const encodedCity = encodeURIComponent(city);
-
     const response = await WeatherApi.get(
       `locations/v1/cities/search?q=${encodedCity}`
     );
     setResponseCities(response.data);
   };
 
-  const onSubmiteValidate = (e: any) => {
-    e.preventDefault();
-    const specialChars = /[^A-Za-z\s]/g;
-    try {
-      if (specialChars.test(enteredCity)) {
-        setErrorInput("The reasearch must contain just letters");
-      } else if (enteredCity.length === 0) {
-        setErrorInput("Please enter a city name");
-      } else {
-        getSearchedCity(enteredCity);
-        // console.log("submit");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <>
       <form
         className="d-flex mx-5 my-4 justify-content-between"
-        onSubmit={onSubmiteValidate}
+        onSubmit={handleSubmit}
       >
         <div className="d-flex gap-2 px-2 border border-light align-items-center col-md-9">
           <Icon icon="charm:search" fontSize={24} className="text-secondary" />
@@ -67,10 +57,6 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
           Search
         </button>
       </form>
-      {/* <input onChange={cityEnteredHandler} />
-      <button type="button" onClick={onSubmiteValidate}>
-        Confere
-      </button> */}
       <div className="d-flex flex-column mx-5 my-5 gap-3">
         {responseCities && responseCities.length > 0 ? (
           responseCities.slice(0, 3).map((city: any) => {
