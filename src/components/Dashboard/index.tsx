@@ -5,8 +5,6 @@ import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
 
-//TODO: Today's highlight with data
-
 export const Dashboard = ({ location, currentWeather }: any) => {
   const [forecast, setForecast] = useState<any>([]);
 

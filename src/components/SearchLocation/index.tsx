@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { WeatherApi } from "../../api/api";
 import { CityProps } from "../../App";
 
-//TODO: Error when search with ` ~ ' and ç (Validação no input para não tem caracter especial try catch / expressões regulares)
+//TODO: Validação no input para não tem caracter especial try catch / expressões regulares
 
 export const SearchLocation = ({ setShowLocalWeather }: any) => {
   const [enteredCity, setEnteredCity] = useState("");
@@ -27,6 +27,16 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
     setResponseCities(response.data);
   };
 
+  const containSpecialChars = (str: string) => {
+    const specialChars = /[^A-Za-z]/g;
+    return specialChars.test(str);
+  };
+
+  if (containSpecialChars(enteredCity)) {
+    console.log("Tem caracter especial");
+  } else {
+    console.log("NÃO tem caracter especial");
+  }
   return (
     <>
       <form
