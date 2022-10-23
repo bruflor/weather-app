@@ -20,7 +20,7 @@ export const SideBar = ({
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
   };
-  console.log(currentWeather);
+  // console.log(currentWeather);
 
   useEffect(() => {
     getCurrentWeather(location);
@@ -40,7 +40,7 @@ export const SideBar = ({
           <Icon icon="bx:current-location" fontSize={24} />
         </RoundButtons>
       </div>
-      {showLocalWeather && currentWeather ? (
+      {/* {showLocalWeather && currentWeather ? (
         <TodayWeather
           dateTime={currentWeather?.LocalObservationDateTime}
           weatherText={currentWeather.WeatherText}
@@ -50,7 +50,8 @@ export const SideBar = ({
         />
       ) : (
         <SearchLocation setShowLocalWeather={setShowLocalWeather} />
-      )}
+        )} */}
+      <SearchLocation setShowLocalWeather={setShowLocalWeather} />
     </Col>
   );
 };

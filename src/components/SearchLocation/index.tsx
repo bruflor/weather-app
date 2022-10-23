@@ -8,11 +8,11 @@ import { CityProps } from "../../App";
 export const SearchLocation = ({ setShowLocalWeather }: any) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    getSearchedCity(enteredCity);
-  };
+  const [errorInput, setErrorInput] = useState("");
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   getSearchedCity(enteredCity);
+  // };
 
   const cityEnteredHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredCity(e.target.value);
@@ -27,21 +27,28 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
     setResponseCities(response.data);
   };
 
-  const containSpecialChars = (str: string) => {
+  const onSubmiteValidate = (e: any) => {
+    e.preventDefault();
     const specialChars = /[^A-Za-z\s]/g;
-    return specialChars.test(str);
+    try {
+      if (specialChars.test(enteredCity)) {
+        setErrorInput("The reasearch must contain just letters");
+      } else if (enteredCity.length === 0) {
+        setErrorInput("Please enter a city name");
+      } else {
+        getSearchedCity(enteredCity);
+        // console.log("submit");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  if (containSpecialChars(enteredCity)) {
-    console.log("Tem caracter especial");
-  } else {
-    console.log("NÃO tem caracter especial");
-  }
   return (
     <>
       <form
         className="d-flex mx-5 my-4 justify-content-between"
-        onSubmit={handleSubmit}
+        onSubmit={onSubmiteValidate}
       >
         <div className="d-flex gap-2 px-2 border border-light align-items-center col-md-9">
           <Icon icon="charm:search" fontSize={24} className="text-secondary" />
@@ -60,7 +67,10 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
           Search
         </button>
       </form>
-
+      {/* <input onChange={cityEnteredHandler} />
+      <button type="button" onClick={onSubmiteValidate}>
+        Confere
+      </button> */}
       <div className="d-flex flex-column mx-5 my-5 gap-3">
         {responseCities && responseCities.length > 0 ? (
           responseCities.slice(0, 3).map((city: any) => {
@@ -80,7 +90,7 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
             );
           })
         ) : (
-          <div></div>
+          <div>{errorInput}</div>
         )}
       </div>
     </>
