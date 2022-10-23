@@ -28,7 +28,7 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
   };
 
   const containSpecialChars = (str: string) => {
-    const specialChars = /[^A-Za-z]/g;
+    const specialChars = /[^A-Za-z\s]/g;
     return specialChars.test(str);
   };
 
