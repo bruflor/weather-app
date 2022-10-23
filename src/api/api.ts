@@ -4,7 +4,8 @@ export const WeatherApi = axios.create({
     baseURL: "http://dataservice.accuweather.com/",
     method: "GET",
     params: {
-        apikey: "EGz6c2kKB9UObwAvOfLTkUgPLkshVW91",
-        metric: true
+        apikey: "3vvGcaXcODnAOMnwR3Nr5XqAHZm1RQYR",
+        metric: true,
+        details: true
     }
 })

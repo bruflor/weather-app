@@ -3,15 +3,23 @@ import { useEffect, useState } from "react";
 import { WeatherApi } from "../../api/api";
 import { CityProps } from "../../App";
 
-//TODO: Error when search with ` ~ ' and ç (Validação no input para não tem caracter especial try catch / expressões regulares)
-
 export const SearchLocation = ({ setShowLocalWeather }: any) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
+  const [errorInput, setErrorInput] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    getSearchedCity(enteredCity);
+    const specialChars = /[^A-Za-z\s]/g;
+    try {
+      if (!specialChars.test(enteredCity) && enteredCity.length !== 0) {
+        return getSearchedCity(enteredCity);
+      }
+      throw new Error("Search must contain just letters");
+    } catch (err: any) {
+      setErrorInput(err.message);
+      console.error(err);
+    }
   };
 
   const cityEnteredHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +28,6 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
 
   const getSearchedCity = async (city: string) => {
     const encodedCity = encodeURIComponent(city);
-
     const response = await WeatherApi.get(
       `locations/v1/cities/search?q=${encodedCity}`
     );
@@ -50,7 +57,6 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
           Search
         </button>
       </form>
-
       <div className="d-flex flex-column mx-5 my-5 gap-3">
         {responseCities && responseCities.length > 0 ? (
           responseCities.slice(0, 3).map((city: any) => {
@@ -70,7 +76,7 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
             );
           })
         ) : (
-          <div></div>
+          <div>{errorInput}</div>
         )}
       </div>
     </>

@@ -5,9 +5,7 @@ import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
 
-//TODO: Today's highlight with data
-
-export const Dashboard = ({ location }: any) => {
+export const Dashboard = ({ location, currentWeather }: any) => {
   const [forecast, setForecast] = useState<any>([]);
 
   const getForecasts = async (localCode: string) => {
@@ -48,12 +46,32 @@ export const Dashboard = ({ location }: any) => {
       <h3 className="py-2">
         {localStorage.getItem("cityName")}'s Highlights for Today
       </h3>
-      <Row xs={1} md={2} className="d-flex align-items-center gy-4">
-        <StatusCard />
-        <StatusCard />
-        <StatusCard />
-        <StatusCard />
-      </Row>
+      {currentWeather ? (
+        <Row xs={1} md={2} className="d-flex align-items-center gy-4">
+          <StatusCard
+            title={"Wind Status"}
+            metric={currentWeather.Wind.Speed.Metric.Value}
+            unit={currentWeather.Wind.Speed.Metric.Unit}
+          />
+          <StatusCard
+            title={"Relative Humidity"}
+            metric={currentWeather.RelativeHumidity}
+            unit={"%"}
+          />
+          <StatusCard
+            title={"Visibility"}
+            metric={currentWeather.Visibility.Metric.Value}
+            unit={currentWeather.Visibility.Metric.Unit}
+          />
+          <StatusCard
+            title={"Air Pressure"}
+            metric={currentWeather.Pressure.Metric.Value}
+            unit={currentWeather.Pressure.Metric.Unit}
+          />
+        </Row>
+      ) : (
+        <Row></Row>
+      )}
     </Col>
   );
 };

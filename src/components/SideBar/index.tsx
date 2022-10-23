@@ -5,41 +5,20 @@ import { RoundButtons } from "../UI/RoundButtons";
 import { WeatherApi } from "../../api/api";
 import { useEffect, useState } from "react";
 import { SearchLocation } from "../SearchLocation";
-import { CityProps } from "../../App";
 
 //TODO: Get pc local network with button (browser authorizin)
 
-interface CurrentWeatherProps {
-  LocalObservationDateTime: string;
-  EpochTime: number;
-  WeatherText: string;
-  WeatherIcon: number;
-  HasPrecipitation: true;
-  PrecipitationType: null;
-  IsDayTime: false;
-  Temperature: {
-    Metric: {
-      Value: number;
-      Unit: string;
-      UnitType: number;
-    };
-    Imperial: {
-      Value: number;
-      Unit: string;
-      UnitType: number;
-    };
-  };
-}
-export const SideBar = ({ location }: any) => {
-  const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
-
+export const SideBar = ({
+  location,
+  currentWeather,
+  setCurrentWeather,
+}: any) => {
   const [showLocalWeather, setShowLocalWeather] = useState(true);
 
   const getCurrentWeather = async (localCode: string) => {
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
   };
-  console.log(location);
 
   useEffect(() => {
     getCurrentWeather(location);
