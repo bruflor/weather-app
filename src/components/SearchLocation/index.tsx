@@ -1,9 +1,13 @@
 import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { WeatherApi } from "../../api/api";
-import { CityProps } from "../../App";
 
-export const SearchLocation = ({ setShowLocalWeather }: any) => {
+//TODO: Change the validation to include Ç and `´~^
+export const SearchLocation = ({
+  setShowLocalWeather,
+  setCityKey,
+  setCityName,
+}: any) => {
   const [enteredCity, setEnteredCity] = useState("");
   const [responseCities, setResponseCities] = useState<any>([]);
   const [errorInput, setErrorInput] = useState("");
@@ -65,8 +69,8 @@ export const SearchLocation = ({ setShowLocalWeather }: any) => {
                 key={city.Key}
                 className="bg-transparent border-secondary border py-3 text-light"
                 onClick={() => {
-                  localStorage.setItem("cityKey", `${city.Key}`);
-                  localStorage.setItem("cityName", `${city.LocalizedName}`);
+                  setCityKey(city.Key);
+                  setCityName(city.LocalizedName);
                   setShowLocalWeather(true);
                 }}
               >

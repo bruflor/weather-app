@@ -5,7 +5,7 @@ import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
 import { RoundButtons } from "../UI/RoundButtons";
 
-export const Dashboard = ({ location, currentWeather }: any) => {
+export const Dashboard = ({ cityKey, currentWeather }: any) => {
   const [forecast, setForecast] = useState<any>([]);
 
   const getForecasts = async (localCode: string) => {
@@ -16,8 +16,8 @@ export const Dashboard = ({ location, currentWeather }: any) => {
   };
 
   useEffect(() => {
-    getForecasts(location);
-  }, [location]);
+    getForecasts(cityKey);
+  }, [cityKey]);
 
   return (
     <Col md={6} className="mx-auto p-5">

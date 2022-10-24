@@ -35,20 +35,31 @@ interface CurrentWeatherProps {
 }
 
 function App() {
-  const [location, setLocation] = useState<any>(
-    localStorage.getItem("cityKey")
-  );
+  const [cityName, setCityName] = useState(localStorage.getItem("cityName"));
+  const [cityKey, setCityKey] = useState(localStorage.getItem("cityKey"));
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
+
+  useEffect(() => {
+    localStorage.setItem("cityKey", JSON.stringify(cityKey));
+    localStorage.setItem("cityName", JSON.stringify(cityName));
+  }, [cityKey, cityName]);
 
   return (
     <Container fluid className="p-0 m-0">
       <Row className="p-0 m-0" style={{ height: "100vh" }}>
         <SideBar
-          location={location}
+          cityName={cityName}
+          cityKey={cityKey}
+          setCityName={setCityName}
+          setCityKey={setCityKey}
           currentWeather={currentWeather}
           setCurrentWeather={setCurrentWeather}
         />
-        <Dashboard location={location} currentWeather={currentWeather} />
+        <Dashboard
+          cityName={cityName}
+          cityKey={cityKey}
+          currentWeather={currentWeather}
+        />
       </Row>
     </Container>
   );
