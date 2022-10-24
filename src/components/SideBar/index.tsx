@@ -19,6 +19,7 @@ export const SideBar = ({
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
   };
+  console.log(currentWeather);
 
   useEffect(() => {
     getCurrentWeather(location);
@@ -45,6 +46,7 @@ export const SideBar = ({
           tempIs={"celsius"}
           celsiusTemp={currentWeather.Temperature.Metric.Value}
           faTemp={currentWeather.Temperature.Imperial.Value}
+          apiIcon={currentWeather.WeatherIcon}
         />
       ) : (
         <SearchLocation setShowLocalWeather={setShowLocalWeather} />
