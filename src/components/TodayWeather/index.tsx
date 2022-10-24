@@ -2,7 +2,6 @@ import "./styles.scss";
 import Thunderstorm from "../../assets/Thunderstorm.png";
 import LightRain from "../../assets/LightRain.png";
 import HeavyCloud from "../../assets/HeavyCloud.png";
-import HeavyRain from "../../assets/HeavyRain.png";
 import Clear from "../../assets/Clear.png";
 import Cloudy from "../../assets/LightCloud.png";
 import Snow from "../../assets/Snow.png";
@@ -76,7 +75,7 @@ export const TodayWeather = ({
       case 41:
       case 42:
       case 16: {
-        const message = HeavyRain;
+        const message = Thunderstorm;
         setWeatherIcon(message);
         break;
       }
@@ -98,7 +97,7 @@ export const TodayWeather = ({
       }
     }
   }, [apiIcon]);
-  console.log(weatherIcon);
+  // console.log(weatherIcon);
 
   const formatedDate = new Date(dateTime).toLocaleDateString("en-us", {
     weekday: "short",

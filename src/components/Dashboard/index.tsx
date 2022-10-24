@@ -18,6 +18,7 @@ export const Dashboard = ({ location, currentWeather }: any) => {
   useEffect(() => {
     getForecasts(location);
   }, [location]);
+  console.log(forecast);
 
   return (
     <Col md={6} className="mx-auto p-5">
@@ -36,6 +37,7 @@ export const Dashboard = ({ location, currentWeather }: any) => {
             <DayCard
               id={cardId}
               key={cardId}
+              icon={day.Day.Icon}
               currentDate={day.Date}
               minWeather={day.Temperature.Minimum.Value}
               maxWeather={day.Temperature.Maximum.Value}
