@@ -18,7 +18,6 @@ export const Dashboard = ({ location, currentWeather }: any) => {
   useEffect(() => {
     getForecasts(location);
   }, [location]);
-  console.log(forecast);
 
   return (
     <Col md={6} className="mx-auto p-5">

@@ -100,11 +100,13 @@ export const DayCard = ({
 
   return (
     <Col>
-      <Card className="cardContainer bg-primary py-4 align-items-center">
+      <Card className="d-flex cardContainer bg-primary py-4 align-items-center">
         <Card.Title>{`
           ${formatedDate}
         `}</Card.Title>
-        <Card.Img src={dayIcon} />
+        <div className="iconContainer align-items-center p-0 m-0">
+          <Card.Img src={dayIcon} className="" />
+        </div>
         <Card.Body className="d-flex gap-2">
           <Card.Text className="p-0 m-0">↑ {maxWeather}</Card.Text>
           <Card.Text className="text-secondary p-0 m-0">
