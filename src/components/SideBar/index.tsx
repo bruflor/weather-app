@@ -9,9 +9,12 @@ import { SearchLocation } from "../SearchLocation";
 //TODO: Get pc local network with button (browser authorizin)
 
 export const SideBar = ({
-  location,
   currentWeather,
   setCurrentWeather,
+  cityName,
+  cityKey,
+  setCityKey,
+  setCityName,
 }: any) => {
   const [showLocalWeather, setShowLocalWeather] = useState(true);
 
@@ -19,10 +22,11 @@ export const SideBar = ({
     const response = await WeatherApi.get(`currentconditions/v1/${localCode}`);
     setCurrentWeather(response.data[0]);
   };
+  console.log(currentWeather);
 
   useEffect(() => {
-    getCurrentWeather(location);
-  }, [location]);
+    getCurrentWeather(cityKey);
+  }, [cityKey]);
 
   //code locations: 226081, 274087
   return (
@@ -40,14 +44,22 @@ export const SideBar = ({
       </div>
       {showLocalWeather && currentWeather ? (
         <TodayWeather
+          cityName={cityName}
           dateTime={currentWeather?.LocalObservationDateTime}
           weatherText={currentWeather.WeatherText}
           tempIs={"celsius"}
           celsiusTemp={currentWeather.Temperature.Metric.Value}
           faTemp={currentWeather.Temperature.Imperial.Value}
+          apiIcon={currentWeather.WeatherIcon}
         />
       ) : (
-        <SearchLocation setShowLocalWeather={setShowLocalWeather} />
+        <SearchLocation
+          setShowLocalWeather={setShowLocalWeather}
+          cityName={cityName}
+          cityKey={cityKey}
+          setCityName={setCityName}
+          setCityKey={setCityKey}
+        />
       )}
     </Col>
   );

@@ -1,6 +1,10 @@
 .cardContainer {
   // width: 180px;
-  & > img {
-    width: 50%;
+  // min-height: 100%;
+  & .iconContainer {
+    height: 64px;
+    & > img {
+      height: 100%;
+    }
   }
 }
