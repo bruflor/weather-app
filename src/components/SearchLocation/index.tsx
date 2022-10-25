@@ -14,7 +14,8 @@ export const SearchLocation = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const specialChars = /[^A-Za-z\s]/g;
+    const specialChars = /[\P{L}]/g;
+    // const specialChars = /[^A-Za-z\s]/g;
     try {
       if (!specialChars.test(enteredCity) && enteredCity.length !== 0) {
         return getSearchedCity(enteredCity);
@@ -80,7 +81,7 @@ export const SearchLocation = ({
             );
           })
         ) : (
-          <div>{errorInput}</div>
+          <div className=" text-warning fw-bold fs-5">{errorInput}</div>
         )}
       </div>
     </>

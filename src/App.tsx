@@ -35,13 +35,16 @@ interface CurrentWeatherProps {
 }
 
 function App() {
-  const [cityName, setCityName] = useState(localStorage.getItem("cityName"));
-  const [cityKey, setCityKey] = useState(localStorage.getItem("cityKey"));
+  const getlocalStorageCityKey = localStorage.getItem("cityKey");
+  const getlocalStorageCityName = localStorage.getItem("cityName");
+
+  const [cityName, setCityName] = useState<any>(getlocalStorageCityName);
+  const [cityKey, setCityKey] = useState(getlocalStorageCityKey);
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
 
   useEffect(() => {
-    localStorage.setItem("cityKey", JSON.stringify(cityKey));
-    localStorage.setItem("cityName", JSON.stringify(cityName));
+    localStorage.setItem("cityKey", `${cityKey}`);
+    localStorage.setItem("cityName", `${cityName}`);
   }, [cityKey, cityName]);
 
   return (

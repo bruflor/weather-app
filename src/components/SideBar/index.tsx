@@ -38,9 +38,9 @@ export const SideBar = ({
         >
           {showLocalWeather ? "Search for places" : "Back to previous"}
         </button>
-        <RoundButtons color="secondary" onClick={() => {}}>
+        {/* <RoundButtons color="secondary" onClick={() => {}}>
           <Icon icon="bx:current-location" fontSize={24} />
-        </RoundButtons>
+        </RoundButtons> */}
       </div>
       {showLocalWeather && currentWeather ? (
         <TodayWeather
