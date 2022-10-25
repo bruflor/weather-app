@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const WeatherApi = axios.create({
-    baseURL: "http://dataservice.accuweather.com/",
+    baseURL: "https://dataservice.accuweather.com/",
     method: "GET",
     params: {
         apikey: "t4umszCGcLbwsCq5c6sENb87h3nqv5rk",
