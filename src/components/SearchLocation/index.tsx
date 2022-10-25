@@ -14,10 +14,10 @@ export const SearchLocation = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const specialChars = /[\P{L}]/g;
-    // const specialChars = /[^A-Za-z\s]/g;
+    //\pL all letters of unicode
+    const specialChars = /[\pL]/g;
     try {
-      if (!specialChars.test(enteredCity) && enteredCity.length !== 0) {
+      if (specialChars.test(enteredCity) && enteredCity.length !== 0) {
         return getSearchedCity(enteredCity);
       }
       throw new Error("Search must contain just letters");
