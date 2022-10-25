@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WeatherApi } from "../../api/api";
 
 //TODO: Change the validation to include Ç and `´~^
@@ -12,10 +12,11 @@ export const SearchLocation = ({
   const [responseCities, setResponseCities] = useState<any>([]);
   const [errorInput, setErrorInput] = useState("");
 
+  useEffect(() => {}, [errorInput]);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //\pL all letters of unicode
-    const specialChars = /[\p{Lu}\p{Lt}\p{Mn}\p{M}\p{Latin} ]/g;
+    const specialChars = /[\p{Lu}\p{Lt}\p{Mn}\p{M}\ç ]/g;
+    // const specialChars = /[\p{Lu}\p{Lt}\p{Mn}\p{M}\p{Latin} ]/g;
     try {
       if (specialChars.test(enteredCity) && enteredCity.length !== 0) {
         return getSearchedCity(enteredCity);
