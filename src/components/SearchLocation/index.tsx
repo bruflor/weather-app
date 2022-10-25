@@ -15,7 +15,7 @@ export const SearchLocation = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //\pL all letters of unicode
-    const specialChars = /[\pL]/g;
+    const specialChars = /[\p{Lu}\p{Lt}\p{Mn}\p{M}\p{Latin} ]/g;
     try {
       if (specialChars.test(enteredCity) && enteredCity.length !== 0) {
         return getSearchedCity(enteredCity);
