@@ -14,11 +14,11 @@ This project was bootstrapped with Create React App. Clone down this repository 
 #### 2. npm run build
 #### 3. npm start
 
-or you can check the **deployed version** <a href="https://weather-app-pearl-one.vercel.app/" target="_blank">here</a>
+or you can check here the <a href="https://weather-app-pearl-one.vercel.app/" target="_blank">**deployed version** </a>
 
 ## Process and objectives
 
-The idea and layout of the projects are from devChallenge and you can <a href="https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv" target="_blank">check here</a>. The API suggested in the challenge is offline, so the app is using another one.
+The idea and layout of the projects are from <a href="https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv" target="_blank">devChallenge</a>. The API suggested in the challenge is offline, so the app is using another one.
 
 The application was built with **ReactJS** and **TypeScript**, for http calls the **Axios** library was chosen. To prioritize responsiveness and speed up app build, I used **Bootstrap 5** with some CSS replaced in **Sass**. Search input validation was done with **RegExp**.
 
