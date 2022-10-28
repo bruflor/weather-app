@@ -9,8 +9,6 @@ import Sleet from "../../assets/Sleet.png";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 
-//? Help: Switch Case to change de icon here and in forecast
-
 interface WeatherProps {
   weatherText: string;
   tempIs: string;
@@ -30,7 +28,7 @@ export const TodayWeather = ({
   apiIcon,
   cityName,
 }: WeatherProps) => {
-  const [weatherIcon, setWeatherIcon] = useState<any>();
+  const [weatherIcon, setWeatherIcon] = useState<string>();
 
   useEffect(() => {
     switch (apiIcon) {
@@ -99,7 +97,6 @@ export const TodayWeather = ({
       }
     }
   }, [apiIcon]);
-  // console.log(weatherIcon);
 
   const formatedDate = new Date(dateTime).toLocaleDateString("en-us", {
     weekday: "short",

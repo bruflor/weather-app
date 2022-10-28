@@ -12,14 +12,14 @@ export interface CityProps {
   cityName: string;
   setCityName: (cityName: string) => void;
 }
-interface CurrentWeatherProps {
+export interface CurrentWeatherProps {
   LocalObservationDateTime: string;
   EpochTime: number;
   WeatherText: string;
   WeatherIcon: number;
-  HasPrecipitation: true;
-  PrecipitationType: null;
-  IsDayTime: false;
+  HasPrecipitation: boolean;
+  PrecipitationType: string;
+  IsDayTime: boolean;
   Temperature: {
     Metric: {
       Value: number;
@@ -35,11 +35,13 @@ interface CurrentWeatherProps {
 }
 
 function App() {
-  // const getlocalStorageCityKey = localStorage.getItem("cityKey");
-  // const getlocalStorageCityName = localStorage.getItem("cityName");
+  const getlocalStorageCityName = localStorage.getItem("cityName") || "Lisbon";
+  const getlocalStorageCityKey = localStorage.getItem("cityKey") || "274087";
 
-  const [cityName, setCityName] = useState<any>("Lisbon");
-  const [cityKey, setCityKey] = useState(274087);
+  const [cityName, setCityName] = useState<string>(getlocalStorageCityName);
+  const [cityKey, setCityKey] = useState<number>(
+    parseInt(getlocalStorageCityKey)
+  );
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherProps>();
 
   useEffect(() => {
