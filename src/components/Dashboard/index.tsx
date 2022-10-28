@@ -1,12 +1,30 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { WeatherApi } from "../../api/api";
+import { CurrentWeatherProps } from "../../App";
 import { DayCard } from "../UI/Cards/daysCard";
 import { StatusCard } from "../UI/Cards/statusCard";
-import { RoundButtons } from "../UI/RoundButtons";
 
-export const Dashboard = ({ cityKey, currentWeather }: any) => {
-  const [forecast, setForecast] = useState<any>([]);
+interface DashProps {
+  cityKey: number;
+  currentWeather?: CurrentWeatherProps;
+}
+interface ForeCastProps {
+  Day: {
+    Icon: number;
+  };
+  Date: string;
+  Temperature: {
+    Minimum: {
+      Value: number;
+    };
+    Maximum: {
+      Value: number;
+    };
+  };
+}
+export const Dashboard = ({ cityKey, currentWeather }: DashProps) => {
+  const [forecast, setForecast] = useState<ForeCastProps[]>([]);
 
   const getForecasts = async (localCode: string) => {
     const response = await WeatherApi.get(
@@ -16,21 +34,13 @@ export const Dashboard = ({ cityKey, currentWeather }: any) => {
   };
 
   useEffect(() => {
-    getForecasts(cityKey);
+    getForecasts(`${cityKey}`);
   }, [cityKey]);
 
   return (
     <Col md={6} className="mx-auto p-5">
-      <Row className="d-flex gap-2 justify-content-end pb-5">
-        {/* <RoundButtons color="secondary">
-          <b>°C</b>
-        </RoundButtons>
-        <RoundButtons color="light">
-          <b>°F</b>
-        </RoundButtons> */}
-      </Row>
       <Row xs={1} md={5} className="py-5">
-        {forecast.map((day: any) => {
+        {forecast.map((day: ForeCastProps) => {
           const cardId = Math.random().toString();
           return (
             <DayCard

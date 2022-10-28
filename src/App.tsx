@@ -14,12 +14,8 @@ export interface CityProps {
 }
 export interface CurrentWeatherProps {
   LocalObservationDateTime: string;
-  EpochTime: number;
   WeatherText: string;
   WeatherIcon: number;
-  HasPrecipitation: boolean;
-  PrecipitationType: string;
-  IsDayTime: boolean;
   Temperature: {
     Metric: {
       Value: number;
@@ -32,6 +28,27 @@ export interface CurrentWeatherProps {
       UnitType: number;
     };
   };
+  Wind: {
+    Speed: {
+      Metric: {
+        Value: number;
+        Unit: string;
+      };
+    };
+  };
+  Visibility: {
+    Metric: {
+      Value: number;
+      Unit: string;
+    };
+  };
+  Pressure: {
+    Metric: {
+      Value: number;
+      Unit: string;
+    };
+  };
+  RelativeHumidity: number;
 }
 
 function App() {
@@ -60,11 +77,7 @@ function App() {
           currentWeather={currentWeather}
           setCurrentWeather={setCurrentWeather}
         />
-        <Dashboard
-          cityName={cityName}
-          cityKey={cityKey}
-          currentWeather={currentWeather}
-        />
+        <Dashboard cityKey={cityKey} currentWeather={currentWeather} />
       </Row>
     </Container>
   );
