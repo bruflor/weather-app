@@ -3,7 +3,7 @@ import "./styles.scss";
 
 interface StatusCardProps {
   title: string;
-  metric: string;
+  metric: number;
   unit: string;
 }
 export const StatusCard = ({ title, metric, unit }: StatusCardProps) => {
