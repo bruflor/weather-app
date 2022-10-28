@@ -22,17 +22,17 @@ export const SearchLocation = ({
   const [responseCities, setResponseCities] = useState<ResponseCityProps[]>([]);
   const [errorInput, setErrorInput] = useState("");
 
-  useEffect(() => {}, [errorInput]);
+  useEffect(() => {}, [responseCities]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const specialChars = /[\p{Lu}\p{Lt}\p{Mn}\p{M}\ç ]/g;
+    const specialChars = /[\p{Lu}\p{Lt}\p{Mn}\p{M}ç ]/g;
 
     try {
       if (specialChars.test(enteredCity) && enteredCity.length !== 0) {
         return getSearchedCity(enteredCity);
       }
-      throw new Error("Search must contain just letters");
+      throw new Error("Something went wrong, try again");
     } catch (err: any) {
       setErrorInput(err.message);
       console.error(err);
@@ -49,8 +49,9 @@ export const SearchLocation = ({
       `locations/v1/cities/search?q=${encodedCity}`
     );
     setResponseCities(response.data);
+    setErrorInput("");
   };
-  console.log(responseCities);
+  // console.log(responseCities);
   return (
     <>
       <form
