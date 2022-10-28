@@ -9,8 +9,22 @@ interface DashProps {
   cityKey: number;
   currentWeather?: CurrentWeatherProps;
 }
+interface ForeCastProps {
+  Day: {
+    Icon: number;
+  };
+  Date: string;
+  Temperature: {
+    Minimum: {
+      Value: number;
+    };
+    Maximum: {
+      Value: number;
+    };
+  };
+}
 export const Dashboard = ({ cityKey, currentWeather }: DashProps) => {
-  const [forecast, setForecast] = useState<any>([]);
+  const [forecast, setForecast] = useState<ForeCastProps[]>([]);
 
   const getForecasts = async (localCode: string) => {
     const response = await WeatherApi.get(
@@ -26,7 +40,7 @@ export const Dashboard = ({ cityKey, currentWeather }: DashProps) => {
   return (
     <Col md={6} className="mx-auto p-5">
       <Row xs={1} md={5} className="py-5">
-        {forecast.map((day: any) => {
+        {forecast.map((day: ForeCastProps) => {
           const cardId = Math.random().toString();
           return (
             <DayCard
