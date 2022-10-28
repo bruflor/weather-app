@@ -1,18 +1,25 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import { WeatherApi } from "../../api/api";
-import { CurrentWeatherProps } from "../../App";
 
-//TODO: Change the validation to include Ç and `´~^
+interface ResponseCityProps {
+  AdministrativeArea: {
+    EnglishName: string;
+  };
+  Country: {
+    EnglishName: string;
+  };
+  Key: string;
+  LocalizedName: string;
+}
+
 export const SearchLocation = ({
   setShowLocalWeather,
   setCityKey,
   setCityName,
 }: any) => {
   const [enteredCity, setEnteredCity] = useState("");
-  const [responseCities, setResponseCities] = useState<CurrentWeatherProps[]>(
-    []
-  );
+  const [responseCities, setResponseCities] = useState<ResponseCityProps[]>([]);
   const [errorInput, setErrorInput] = useState("");
 
   useEffect(() => {}, [errorInput]);
@@ -31,7 +38,6 @@ export const SearchLocation = ({
       console.error(err);
     }
   };
-  //TODO: Trocar o if ternario para renderizar o erro quando há erro e as cidades quando não há erro e as validações abaixo
 
   const cityEnteredHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredCity(e.target.value);
@@ -44,6 +50,7 @@ export const SearchLocation = ({
     );
     setResponseCities(response.data);
   };
+  console.log(responseCities);
   return (
     <>
       <form
@@ -69,7 +76,7 @@ export const SearchLocation = ({
       </form>
       <div className="d-flex flex-column mx-5 my-5 gap-3">
         {responseCities && responseCities.length > 0 && errorInput === "" ? (
-          responseCities.slice(0, 3).map((city: any) => {
+          responseCities.slice(0, 3).map((city: ResponseCityProps) => {
             return (
               <button
                 key={city.Key}
