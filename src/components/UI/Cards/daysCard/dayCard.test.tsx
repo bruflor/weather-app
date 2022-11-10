@@ -34,7 +34,7 @@ describe("Forecast dayCard", () => {
     },
   ];
   it("should render converted data, day and temperature", async () => {
-    const { debug } = render(
+    render(
       <>
         {dummyForecast.map((day) => {
           return (
