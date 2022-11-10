@@ -51,7 +51,7 @@ describe("Forecast dayCard", () => {
       </>
     );
     expect(await screen.findByText("Tue, Sep 20")).toBeInTheDocument();
-    expect(await screen.findByText("↑ 18")).toBeInTheDocument();
+    expect(await screen.findByText("↑ 45")).toBeInTheDocument();
   });
 });
 export {};
