@@ -3,21 +3,22 @@ import { render, screen } from "@testing-library/react";
 import { TodayWeather } from ".";
 
 describe("TodayWeather component", () => {
-  it("should render date as formated, weekday, month and day", async () => {
-    const dummyWeather = {
-      cityName: "Nárnia",
-      LocalObservationDateTime: "2022-09-20T07:00:00+00:00",
-      WeatherText: "Sunny like always",
-      WeatherIcon: 1,
-      Temperature: {
-        Metric: {
-          Value: 21,
-        },
-        Imperial: {
-          Value: 36,
-        },
+  const dummyWeather = {
+    cityName: "Nárnia",
+    LocalObservationDateTime: "2022-09-20T07:00:00+00:00",
+    WeatherText: "Sunny like always",
+    WeatherIcon: 1,
+    Temperature: {
+      Metric: {
+        Value: 21,
       },
-    };
+      Imperial: {
+        Value: 36,
+      },
+    },
+  };
+
+  it("should render date as formated, weekday, month and day", async () => {
     render(
       <TodayWeather
         weatherText={dummyWeather.WeatherText}
