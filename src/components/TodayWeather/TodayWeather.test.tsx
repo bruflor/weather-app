@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { TodayWeather } from ".";
 
 describe("TodayWeather component", () => {
-  it("should render", async () => {
+  it("should render date as formated, weekday, month and day", async () => {
     const dummyWeather = {
       cityName: "Nárnia",
       LocalObservationDateTime: "2022-09-20T07:00:00+00:00",
