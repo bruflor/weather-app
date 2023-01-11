@@ -13,6 +13,8 @@ interface ResponseCityProps {
   LocalizedName: string;
 }
 
+// Pesquisar: mockreturnvalue para teste do submit. Mockrejectvalue - testar o cenário de erro
+//Jest mock axios
 export const SearchLocation = ({
   setShowLocalWeather,
   setCityKey,

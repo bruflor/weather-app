@@ -2,6 +2,8 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { TodayWeather } from ".";
 
+//TODO? Além de components, testar funções.
+
 describe("TodayWeather component", () => {
   const dummyWeather = {
     cityName: "Nárnia",
