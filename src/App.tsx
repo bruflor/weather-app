@@ -6,7 +6,9 @@ import { Container, Row } from "react-bootstrap";
 import { SideBar } from "./components/SideBar";
 import { Dashboard } from "./components/Dashboard";
 
-//TODO?
+//TODO? Teste de validação do form (exe: pesquisa não pode conter caracteres especiais)
+//TODO? Qualquer interação do usuario deve ser testada
+//TODO? testar variáveis de renderização do component. (ex: ícones, nomes das cidades nos cards, etc)
 
 export interface CityProps {
   selectedCity: number;
